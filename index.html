@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suhani 💌 Will you be my Valentine?</title>
+  <style>
+    :root{
+      --pink:#ff4d7d;
+      --hot:#ff2d55;
+      --soft:#ffd1dc;
+      --ink:#2b2b2b;
+      --card: rgba(255,255,255,.25);
+      --glass: rgba(255,255,255,.12);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:#fff;
+      overflow:hidden;
+      background: radial-gradient(circle at 20% 20%, #ffb3c7, transparent 55%),
+                  radial-gradient(circle at 80% 10%, #ffc6e0, transparent 50%),
+                  radial-gradient(circle at 50% 90%, #ff7aa6, transparent 55%),
+                  linear-gradient(135deg, #ff3d6e, #ff8fb3 55%, #ffd1dc);
+      animation:bgShift 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgShift{
+      from{filter:hue-rotate(0deg) saturate(1)}
+      to{filter:hue-rotate(15deg) saturate(1.15)}
+    }
+
+    /* Sparkly overlay */
+    .sparkles{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.55) 0 1px, transparent 2px) 0 0/80px 80px,
+        radial-gradient(circle, rgba(255,255,255,.35) 0 1px, transparent 2px) 40px 40px/120px 120px;
+      opacity:.25;
+      animation: sparkleMove 12s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes sparkleMove{
+      from{transform:translateY(0)}
+      to{transform:translateY(-120px)}
+    }
+
+    /* Floating hearts container */
+    .hearts{
+      position:absolute; inset:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      width:18px; height:18px;
+      transform: rotate(45deg);
+      background: rgba(255,255,255,.9);
+      border-radius: 4px;
+      opacity: .85;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.12));
+      animation: floatUp linear infinite;
+    }
+    .heart:before, .heart:after{
+      content:"";
+      position:absolute;
+      width:18px; height:18px;
+      background: inherit;
+      border-radius:50%;
+    }
+    .heart:before{ left:-9px; top:0;}
+    .heart:after{ left:0; top:-9px;}
+    @keyframes floatUp{
+      from{ transform:translateY(110vh) rotate(45deg) scale(.8); opacity:0}
+      10%{opacity:.85}
+      to{ transform:translateY(-20vh) rotate(45deg) scale(1.25); opacity:0}
+    }
+
+    /* Main card */
+    .card{
+      position:relative;
+      width:min(92vw, 560px);
+      padding:28px 22px 22px;
+      border-radius:24px;
+      background: linear-gradient(180deg, var(--card), var(--glass));
+      border:1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      text-align:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.25);
+      font-weight:600;
+      letter-spacing:.3px;
+      font-size:14px;
+    }
+
+    h1{
+      margin:16px 0 8px;
+      font-size: clamp(28px, 5vw, 44px);
+      line-height:1.05;
+      text-shadow: 0 10px 28px rgba(0,0,0,.18);
+    }
+
+    .sub{
+      margin:0 auto 18px;
+      max-width:46ch;
+      font-size: 16px;
+      opacity:.95;
+      line-height:1.55;
+    }
+
+    .name{
+      font-weight:800;
+      color:#fff;
+      text-decoration: underline wavy rgba(255,255,255,.55);
+      text-underline-offset: 6px;
+    }
+
+    .bigHeart{
+      width:92px;
+      margin:10px auto 18px;
+      aspect-ratio:1;
+      position:relative;
+      transform: rotate(45deg);
+      background: rgba(255,255,255,.9);
+      border-radius: 18px;
+      box-shadow: 0 18px 35px rgba(0,0,0,.18);
+      animation:pulse 1.2s ease-in-out infinite;
+    }
+    .bigHeart:before,.bigHeart:after{
+      content:"";
+      position:absolute;
+      width:92px; height:92px;
+      background: inherit;
+      border-radius:50%;
+    }
+    .bigHeart:before{ left:-46px; top:0;}
+    .bigHeart:after{ left:0; top:-46px;}
+    @keyframes pulse{
+      0%,100%{transform:rotate(45deg) scale(1)}
+      50%{transform:rotate(45deg) scale(1.08)}
+    }
+
+    .btnRow{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    button{
+      border:0;
+      padding:12px 18px;
+      border-radius:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      font-size:16px;
+    }
+    button:active{transform:scale(.98)}
+
+    .yes{
+      background: linear-gradient(180deg, #ffffff, #ffe6ee);
+      color: var(--ink);
+      box-shadow: 0 14px 26px rgba(0,0,0,.16);
+    }
+    .yes:hover{filter:brightness(1.04)}
+
+    .no{
+      background: rgba(255,255,255,.16);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(10px);
+    }
+
+    .footer{
+      margin-top: 16px;
+      font-size: 13px;
+      opacity:.85;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:20px;
+      transform:translateX(-50%);
+      background: rgba(0,0,0,.55);
+      color:#fff;
+      padding:10px 14px;
+      border-radius: 12px;
+      font-weight:600;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-6px);
+    }
+
+    .confetti{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      border-radius:24px;
+    }
+    .piece{
+      position:absolute;
+      width:10px;
+      height:16px;
+      opacity:.9;
+      border-radius:4px;
+      animation: fall 1.2s ease-in forwards;
+    }
+    @keyframes fall{
+      from{ transform: translateY(-30px) rotate(0deg); opacity:1}
+      to{ transform: translateY(520px) rotate(260deg); opacity:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card">
+    <div class="confetti" id="confetti"></div>
+
+    <div class="badge">💘 Valentine Mode: ON</div>
+
+    <div class="bigHeart" aria-hidden="true"></div>
+
+    <h1><span class="name">Suhani</span>, will you be my Valentine? 🌹</h1>
+
+    <p class="sub">
+      I was trying to write a normal message… but then my heart said:
+      <b>“Make it a whole website.”</b> 😭💞
+      <br/>
+      So here I am, asking properly.
+    </p>
+
+    <div class="btnRow">
+      <button class="yes" id="yesBtn">YES 💞</button>
+      <button class="no" id="noBtn">No 🙈</button>
+    </div>
+
+    <div class="footer">
+      (P.S. Clicking “Yes” will cause an emergency level of happiness ✨)
+    </div>
+  </main>
+
+  <div class="toast" id="toast">Aaaaaa okay okay 😭💖</div>
+
+  <script>
+    // Floating hearts generator
+    const hearts = document.getElementById('hearts');
+    function spawnHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      const size = 10 + Math.random()*18;
+      h.style.width = size + 'px';
+      h.style.height = size + 'px';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.animationDuration = (5 + Math.random()*6) + 's';
+      h.style.opacity = (0.4 + Math.random()*0.55).toFixed(2);
+
+      // tint some hearts slightly pink
+      const tint = Math.random();
+      if(tint > 0.6){
+        h.style.background = 'rgba(255, 255, 255, 0.92)';
+      } else if(tint > 0.3){
+        h.style.background = 'rgba(255, 230, 238, 0.92)';
+      } else {
+        h.style.background = 'rgba(255, 210, 220, 0.92)';
+      }
+
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(), 12000);
+    }
+    setInterval(spawnHeart, 240);
+    for(let i=0;i<18;i++) setTimeout(spawnHeart, i*140);
+
+    // Confetti on YES
+    const confetti = document.getElementById('confetti');
+    const toast = document.getElementById('toast');
+
+    function popConfetti(){
+      confetti.innerHTML = '';
+      const pieces = 60;
+      for(let i=0;i<pieces;i++){
+        const p = document.createElement('div');
+        p.className = 'piece';
+        p.style.left = Math.random()*100 + '%';
+        p.style.top = (-20 - Math.random()*80) + 'px';
+        p.style.transform = rotate(${Math.random()*180}deg);
+        p.style.animationDelay = (Math.random()*0.15) + 's';
+
+        // random bright-ish colors
+        const colors = ['#ffffff','#ffe6ee','#ffd1dc','#ffb3c7','#ff7aa6'];
+        p.style.background = colors[Math.floor(Math.random()*colors.length)];
+        confetti.appendChild(p);
+      }
+    }
+
+    document.getElementById('yesBtn').addEventListener('click', () => {
+      popConfetti();
+      toast.textContent = "YAYYY!! 💖 I’m officially the luckiest 😭✨";
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2400);
+      document.querySelector('h1').innerHTML = '<span class="name">Suhani</span> said YES!! 💞🌹';
+      document.querySelector('.sub').innerHTML =
+        "Okay now we have to celebrate properly 😌✨<br/>" +
+        "Step 1: Cute date. Step 2: Photos. Step 3: Dessert. 🍰";
+    });
+
+    // NO button that runs away
+    const noBtn = document.getElementById('noBtn');
+    let dodgeCount = 0;
+
+    function dodge(){
+      dodgeCount++;
+      const card = document.querySelector('.card').getBoundingClientRect();
+      const btn = noBtn.getBoundingClientRect();
+
+      // Keep the button inside the card area
+      const maxX = card.width - btn.width - 24;
+      const maxY = card.height - btn.height - 24;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+
+      toast.textContent = dodgeCount < 5
+        ? "No button is shy 🙈"
+        : "Okay… the No button retired 😭💘";
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 1200);
+
+      if(dodgeCount >= 7){
+        noBtn.textContent = "YES 💞 (fine)";
+        noBtn.className = "yes";
+        noBtn.onclick = () => document.getElementById('yesBtn').click();
+      }
+    }
+
+    noBtn.addEventListener('mouseenter', dodge);
+    noBtn.addEventListener('click', dodge);
+  </script>
+</body>
+</html>
